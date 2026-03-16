@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Lock & Logic | Coming Soon — Escape Rooms in Pottstown, PA</title>
+  <meta name="description" content="Lock & Logic is coming to Pottstown, PA. Immersive escape room experiences where every clue counts and every second matters." />
+  <meta name="theme-color" content="#030d19" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lock & Logic | Coming Soon — Escape Rooms in Pottstown, PA" />
+  <meta property="og:description" content="Lock & Logic is coming to Pottstown, PA. Immersive escape room experiences where every clue counts and every second matters." />
+  <meta property="og:site_name" content="Lock & Logic" />
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Preload hero background -->
+  <link rel="preload" href="assets/hero-bg.webp" as="image" type="image/webp" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Lock & Logic",
+    "description": "Immersive escape room experiences in Pottstown, PA.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pottstown",
+      "addressRegion": "PA",
+      "addressCountry": "US"
+    },
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+  <main>
+  <section class="hero" aria-label="Hero" style="--dust-opacity: 0.55;">
+    <!-- Layer 1: Background image with Ken Burns -->
+    <div class="hero-bg" aria-hidden="true">
+      <img src="assets/hero-bg.webp" alt="" class="hero-bg-img" />
+    </div>
+
+    <!-- Layer 2: Dark overlay with candlelight -->
+    <div class="hero-overlay-dark" aria-hidden="true"></div>
+
+    <!-- Layer 3: Grid pattern -->
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <!-- Layer 4: Mist container (JS populates) -->
+    <div id="mist" class="hero-mist" aria-hidden="true"></div>
+
+    <!-- Layer 5: Vignette -->
+    <div class="hero-vignette" aria-hidden="true"></div>
+
+    <!-- Layer 6: Particles container (JS populates) -->
+    <div id="particles" class="hero-particles" aria-hidden="true"></div>
+
+    <!-- Layer 7: Lightning flash -->
+    <div class="hero-lightning" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="hero-content">
+      <!-- Logo -->
+      <div class="hero-logo-wrap entrance-slide-top">
+        <div class="hero-logo-glow" aria-hidden="true"></div>
+        <img src="assets/logo.webp" alt="Lock & Logic" class="hero-logo" width="400" height="371" />
+      </div>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle text-glow-teal entrance-slide-left-1">Pottstown, PA</p>
+
+      <!-- Title -->
+      <h1 class="hero-title text-gold-gradient entrance-slide-right">Unlock the Mystery</h1>
+
+      <!-- Description -->
+      <p class="hero-description entrance-slide-left-2">
+        Immersive escape room experiences where every clue counts and every second matters.
+      </p>
+
+      <!-- Coming Soon -->
+      <div class="hero-coming-soon entrance-slide-bottom">
+        <span class="coming-soon-text">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Cursor glow (JS activates) -->
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
