@@ -277,7 +277,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Title */
 .hero-title {
   margin-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
-  font-size: clamp(3.25rem, 8vh, 8rem);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -295,6 +295,7 @@ h1, h2, h3, h4, h5, h6 {
   .hero-description {
     font-size: 1.25rem;
   }
+
 }
 
 /* Coming Soon */
@@ -305,11 +306,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .coming-soon-text {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 3.5vh, 2.5rem);
+  font-size: 40px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3em;
   animation: coming-soon-pulse 3s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 60px;
+  }
+
+  .coming-soon-text {
+    font-size: 70px;
+  }
 }
 
 /* Cursor glow */
