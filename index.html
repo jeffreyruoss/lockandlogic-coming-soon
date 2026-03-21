@@ -46,6 +46,9 @@
 
   <link rel="stylesheet" href="style.css" />
 
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <!-- Structured data -->
   <script type="application/ld+json">
   {
@@ -119,6 +122,35 @@
         <span class="coming-soon-text">Opening Soon</span>
       </div>
 
+      <!-- Newsletter Signup -->
+      <div class="hero-newsletter entrance-fade-in">
+        <p class="newsletter-label">Be the first to know when we open</p>
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <div class="newsletter-inputs">
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              required
+              aria-required="true"
+              maxlength="320"
+              placeholder="you@example.com"
+              class="newsletter-input"
+            />
+            <button type="submit" id="newsletter-submit" class="newsletter-btn">Subscribe</button>
+          </div>
+          <!-- Honeypot -->
+          <div style="position: absolute; left: -9999px;" aria-hidden="true">
+            <label for="newsletter-fax">Fax</label>
+            <input type="text" id="newsletter-fax" name="fax_number" tabindex="-1" autocomplete="off" />
+          </div>
+          <!-- Turnstile -->
+          <div class="cf-turnstile newsletter-turnstile" data-sitekey="0x4AAAAAACuBRCKJlh4IvBBw" data-theme="dark" data-size="compact"></div>
+        </form>
+        <div id="newsletter-status" class="newsletter-status hidden" role="alert" aria-live="assertive"></div>
+      </div>
+
       <!-- Contact Info -->
       <div class="hero-contact entrance-fade-in">
         <div class="contact-items">
@@ -148,5 +180,58 @@
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
   <script src="script.js"></script>
+
+  <script>
+    (function() {
+      var form = document.getElementById('newsletter-form');
+      var submitBtn = document.getElementById('newsletter-submit');
+      var status = document.getElementById('newsletter-status');
+
+      function showStatus(message, isError) {
+        status.textContent = message;
+        status.className = 'newsletter-status ' + (isError ? 'newsletter-status-error' : 'newsletter-status-success');
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var email = form.querySelector('[name="email"]').value.trim();
+        if (!email) { showStatus('Please enter your email address.', true); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showStatus('Please enter a valid email address.', true); return; }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Subscribing...';
+        status.className = 'newsletter-status hidden';
+
+        var formData = new FormData(form);
+        var body = {};
+        formData.forEach(function(value, key) { body[key] = value; });
+
+        fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        .then(function(response) {
+          return response.json().then(function(result) {
+            if (response.ok && result.success) {
+              showStatus("You're subscribed! We'll let you know when we open.", false);
+              form.reset();
+              if (window.turnstile) window.turnstile.reset();
+            } else {
+              showStatus(result.error || 'Something went wrong. Please try again.', true);
+            }
+          });
+        })
+        .catch(function() {
+          showStatus('Network error. Please check your connection and try again.', true);
+        })
+        .finally(function() {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Subscribe';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
