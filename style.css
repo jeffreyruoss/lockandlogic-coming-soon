@@ -275,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Subtitle */
 .hero-subtitle {
   margin-bottom: clamp(0.5rem, 1vh, 1.25rem);
-  font-size: 0.875rem;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.6;
   text-transform: uppercase;
@@ -386,7 +386,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
 }
 
 .newsletter-inputs {
@@ -450,16 +449,6 @@ h1, h2, h3, h4, h5, h6 {
 .newsletter-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.newsletter-turnstile {
-  margin-top: 4px;
-  min-width: 300px;
-  display: none;
-}
-
-.newsletter-turnstile.visible {
-  display: block;
 }
 
 .newsletter-status {

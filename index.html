@@ -143,8 +143,8 @@
             <label for="newsletter-fax">Fax</label>
             <input type="text" id="newsletter-fax" name="fax_number" tabindex="-1" autocomplete="off" />
           </div>
-          <!-- Turnstile -->
-          <div class="cf-turnstile newsletter-turnstile" data-sitekey="0x4AAAAAACuBRCKJlh4IvBBw" data-theme="dark"></div>
+          <!-- Turnstile (invisible) -->
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAACuBRCKJlh4IvBBw" data-theme="dark" data-size="invisible"></div>
         </form>
         <div id="newsletter-status" class="newsletter-status hidden" role="alert" aria-live="assertive"></div>
         </div>
@@ -192,18 +192,19 @@
       }
 
       var container = document.querySelector('.newsletter-container');
-      setTimeout(function() {
+      var pulseTimer = setTimeout(function() {
         container.classList.add('do-pulse');
         container.addEventListener('animationend', function() {
           container.classList.remove('do-pulse');
         }, { once: true });
       }, 7000);
 
-      var emailInput = document.getElementById('newsletter-email');
-      var turnstileEl = document.querySelector('.newsletter-turnstile');
-      emailInput.addEventListener('focus', function() {
-        turnstileEl.classList.add('visible');
+      container.addEventListener('mouseenter', function() {
+        clearTimeout(pulseTimer);
+        container.classList.remove('do-pulse');
       }, { once: true });
+
+      var emailInput = document.getElementById('newsletter-email');
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
